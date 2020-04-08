@@ -37,7 +37,7 @@ void dfs(int u,int p){
         f[u]=mult(f[u],dp[c][0]+dp[c][1]-f[c]);
     }
 }
-
+//https://codeforces.com/blog/entry/75432?#comment-595676  explained a lot
 #undef int
 int main(){
     ios::sync_with_stdio(false);
