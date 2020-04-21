@@ -71,6 +71,26 @@ int gcd(int a, int b){
 int main(){
     optimizeIO();
     tc{
-
+      int n,k;
+      cin>>n>>k;
+      int idx1=n-1,idx2=n-2;
+      rrep(i,n-2,0){
+        int z=(n-1-i);
+        if(k>z){
+          k-=z;
+          continue;
+        }
+        else{
+          idx1=i;
+          idx2=i+z-k+1;
+          break;
+        }
+      }
+      string s="";
+      rep(i,0,n){
+        if(i!=idx1 && i!=idx2) s+="a";
+        else s+="b";
+      }
+      cout<<s<<endl;
     }
 }

@@ -47,53 +47,59 @@
 #define tc int t; cin >> t; while(t--)
 
 using namespace std;
-string repeat(string s, int n) {
-    string s1 = s;
-    for (int i=1; i<n;i++)
-        s += s1;
-    return s;
-}
-string getString(char x) {
-    string s(1, x);
-    return s;
-}
+const long long LL_INF = (long long) 2e18 + 5;
 
-void optimizeIO(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
-int gcd(int a, int b){
-    if (a == 0)  return b;
-    return gcd(b % a, a);
-}
+int N, K;
+vector<int> A;
+vector<long long> prefix_sum, suffix_sum;
 
-int main(){
-    optimizeIO();
-    tc{
-      int n;
-      cin>>n;
-      string s;
-      cin>>s;
-      string s1="",s2="";
-      int flag=0;
-      if(s[0]=='1') s1+="2",s2+="2",flag=1;
-      else if(s[0]=='2') s1+="1",s2+="1",flag=1;
-      else s1+="1",s2+="2";
-      rep(i,1,n){
-        if(s[i]=='1') {
-          if(flag) s1+="0",s2+="1",flag=0;
-          else s1+="1",s2+="0";
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    cin >> N >> K;
+    A.resize(N);
+
+    for (int &a : A)
+        cin >> a;
+
+    sort(A.begin(), A.end());
+    prefix_sum.assign(N + 1, 0);
+    suffix_sum.assign(N + 1, 0);
+
+    for (int i = 0; i < N; i++)
+        prefix_sum[i + 1] = prefix_sum[i] + A[i];
+
+    for (int i = N - 1; i >= 0; i--)
+        suffix_sum[i] = suffix_sum[i + 1] + A[i];
+
+    long long answer = LL_INF;
+
+    for (int i = 0, j = 0; i < N; i = j) {
+        long long value = A[i];
+
+        while (j < N && A[j] == value)
+            j++;
+
+        if (j - i >= K) {
+            answer = 0;
+            break;
         }
-        else if(s[i]=='2') {
-          if(flag) s1+="1",s2+="1";
-          else{
-            s1+="2";
-            s2+="0";
-          }
-        }
-        else s1+="0",s2+="0";
-      }
-      cout<<s1<<"\n"<<s2<<"\n";
+
+        int need = K - (j - i);
+        int before = i;
+        int after = N - j;
+        long long before_cost = before * value - prefix_sum[i];
+        long long after_cost = suffix_sum[j] - after * value;
+
+        if (before >= need)
+            answer = min(answer, before_cost - (before - need));
+
+        if (after >= need)
+            answer = min(answer, after_cost - (after - need));
+
+        answer = min(answer, before_cost + after_cost - (before + after - need));
     }
+
+    cout << answer << '\n';
 }

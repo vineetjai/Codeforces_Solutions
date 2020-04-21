@@ -71,6 +71,9 @@ int gcd(int a, int b){
 int main(){
     optimizeIO();
     tc{
-
+      int a,b;
+      cin>>a>>b;
+      int x=((a+b-1)/b)*b;
+      cout<<x-a<<endl;
     }
 }

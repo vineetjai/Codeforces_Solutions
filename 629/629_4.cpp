@@ -67,10 +67,90 @@ int gcd(int a, int b){
     if (a == 0)  return b;
     return gcd(b % a, a);
 }
+int solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	for (int i = 0; i < n; ++i) {
+		cin >> a[i];
+	}
+
+	if (count(a.begin(), a.end(), a[0]) == n) {
+		cout << 1 << endl;
+		for (int i = 0; i < n; ++i) {
+			cout << 1 << " ";
+		}
+		cout << endl;
+		return 0;
+	}
+
+	if (n % 2 == 0) {
+		cout << 2 << endl;
+		for (int i = 0; i < n; ++i) {
+			cout << i % 2 + 1 << " ";
+		}
+		cout << endl;
+		return 0;
+	}
+
+	for (int i = 0; i < n; ++i) {
+		if (a[i] == a[(i + 1) % n]) {
+			vector<int> ans(n);
+			for (int j = 0, pos = i + 1; pos < n; ++pos, j ^= 1) {
+				ans[pos] = j + 1;
+			}
+			for (int j = 0, pos = i; pos >= 0; --pos, j ^= 1) {
+				ans[pos] = j + 1;
+			}
+			cout << 2 << endl;
+			for (int pos = 0; pos < n; ++pos) {
+				cout << ans[pos] << " ";
+			}
+			cout << endl;
+			return 0;
+		}
+	}
+
+	cout << 3 << endl;
+	for (int i = 0; i < n - 1; ++i) {
+		cout << i % 2 + 1 << " ";
+	}
+	cout << 3 << endl;
+    return 0;
+}
 
 int main(){
     optimizeIO();
     tc{
-
+      // int n;
+      // cin>>n;
+      // int a[n];
+      // rep(i,0,n) cin>>a[i];
+      //
+      // int ans1[n];
+      // rep(i,0,n){
+      //   set<int> s1;
+      //   rep(j,0,3) s1.insert(j+1);
+      //   if(i==0 ){
+      //     ans1[0]=1;
+      //   }
+      //   else if(i==n-1){
+      //     if(a[i-1]!=a[i]) s1.erase(ans1[i-1]);
+      //     if(a[i]!=a[0]) s1.erase(ans1[0]);
+      //     ans1[i]=*s1.begin();
+      //   }
+      //   else{
+      //     if(a[i-1]!=a[i]) {
+      //       s1.erase(ans1[i-1]);
+      //       ans1[i]=*s1.begin();
+      //     }
+      //     else ans1[i]=ans1[i-1];
+      //   }
+      // }
+      // set<int> s(ans1,ans1+n);
+      // cout<<s.size()<<endl;
+      // rep(i,0,n) cout<<ans1[i]<<" ";
+      // cout<<endl;
+      solve();
     }
 }
