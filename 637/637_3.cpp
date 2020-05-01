@@ -46,17 +46,27 @@ bool solve(ll x){
 int main(){
     optimizeIO();
     tc{
-      ll n;
+      int n;
       cin>>n;
-      ll x=1;
-      // while(n%2==0) n/=2,x*=2;
-      for(ll i=2;i<=30;i++){
-        ll x=pow(2*1ll,i)-1;
-        if(n%x==0){
-          cout<<n/x<<endl;
-          break;
-        }
+      int a[n+1];
+      map<int,int> m,m1;
+      rep(i,1,n+1){
+        cin>>a[i];
+        m[a[i]]=i;
       }
-
+      int st=1,idx,en,last_en=n;
+      int flag=0;
+      while(st<=n){
+        en=m[st];
+        idx=m[st];
+        rep(i,idx,last_en+1){
+          if(a[i]!=st){flag=1;break;}
+          st++;
+        }
+        if(flag) break;
+        last_en=en-1;
+      }
+      if(flag) cout<<"No\n";
+      else std::cout << "Yes" << '\n';
     }
 }

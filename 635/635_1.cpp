@@ -85,9 +85,6 @@ int main(){
         else{
           x=x+b-a;
            cout<<x<<" "<<y<<" "<<z<<endl;
-          // else {
-          //
-          // }
         }
       }
       else cout<<x<<" "<<y<<" "<<z<<endl;

@@ -17,10 +17,10 @@ void fix(int &x) {
 int main()
 {
     char s[Nmax], t[Nmax];
-    #ifndef ONLINE_JUDGE
-        freopen ("data.in","r",stdin);
-        freopen ("E.out","w",stdout);
-    #endif
+    // #ifndef ONLINE_JUDGE
+    //     freopen ("data.in","r",stdin);
+    //     freopen ("E.out","w",stdout);
+    // #endif
     cin.sync_with_stdio( false );
     cin >> (s + 1) >> (t + 1);
     int n = strlen(s + 1), m = strlen(t + 1);

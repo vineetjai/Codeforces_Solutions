@@ -46,17 +46,19 @@ bool solve(ll x){
 int main(){
     optimizeIO();
     tc{
-      ll n;
-      cin>>n;
-      ll x=1;
-      // while(n%2==0) n/=2,x*=2;
-      for(ll i=2;i<=30;i++){
-        ll x=pow(2*1ll,i)-1;
-        if(n%x==0){
-          cout<<n/x<<endl;
-          break;
-        }
+      ll n,k;
+      cin>>n>>k;
+      ll a[n];
+      rep(i,0,n) cin>>a[i];
+      ll mx=0,l=0;
+      ll ans=0;
+      rep(i,1,k-1) if(a[i]>a[i-1] && a[i]>a[i+1]) ans++;
+      if(ans>mx) mx=ans;
+      rep(i,k,n){
+        if(i-2>=0 && a[i-1]>a[i-2] && a[i-1]>a[i]) ans++;
+        if(a[i-k+1]>a[i-k+2] && a[i-k+1]>a[i-k]) ans--;
+        if(ans>mx) mx=ans,l=i-k+1;
       }
-
+      cout<<min(mx+1,k)<<" "<<l+1<<endl;
     }
 }

@@ -4,7 +4,6 @@
 #define fori(a) for(auto i : a )
 #define all(a) begin(a), end(a)
 #define set(a,b) memset(a,b,sizeof(a))
-#define sz(a) a.size()
 #define pi 3.14159
 #define ll long long
 #define ull unsigned long long
@@ -12,51 +11,30 @@
 #define PF push_front //deque
 #define mp make_pair
 #define pq priority_queue
-#define mod 1000000007
+const ll mod=1e9+7;
 #define f first
 #define s second
 #define pii pair< int, int >
 #define tc int t; cin >> t; while(t--)
-
 using namespace std;
-string repeat(string s, int n) {
-    string s1 = s;
-    for (int i=1; i<n;i++)
-        s += s1;
-    return s;
-}
-string getString(char x) {
-    string s(1, x);
-    return s;
-}
 
 void optimizeIO(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 }
-int gcd(int a, int b){
-    if (a == 0)  return b;
-    return gcd(b % a, a);
+ll power(ll x,ll y){
+    if(y<=0) return 1;
+    ll z=power(x,y/2);
+    if(y%2) return (((z*z)%mod)*x)%mod;
+    else return ((z*z)%mod);
 }
-bool solve(ll x){
-  if(x&(x-1)) return false;
-  return true;
+ll invmod(ll x){
+    return power(x,mod-2);
 }
 int main(){
     optimizeIO();
     tc{
-      ll n;
-      cin>>n;
-      ll x=1;
-      // while(n%2==0) n/=2,x*=2;
-      for(ll i=2;i<=30;i++){
-        ll x=pow(2*1ll,i)-1;
-        if(n%x==0){
-          cout<<n/x<<endl;
-          break;
-        }
-      }
 
     }
 }

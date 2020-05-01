@@ -46,17 +46,9 @@ bool solve(ll x){
 int main(){
     optimizeIO();
     tc{
-      ll n;
-      cin>>n;
-      ll x=1;
-      // while(n%2==0) n/=2,x*=2;
-      for(ll i=2;i<=30;i++){
-        ll x=pow(2*1ll,i)-1;
-        if(n%x==0){
-          cout<<n/x<<endl;
-          break;
-        }
-      }
-
+      ll n,a,b,c,d;
+      cin>>n>>a>>b>>c>>d;
+      if(n*(a+b)<c-d||n*(a-b)>c+d)cout<<"No\n";
+      else cout<<"Yes\n";
     }
 }
